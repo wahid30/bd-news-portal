@@ -3,13 +3,11 @@ const setCatagory = () => {
   const url = `https://openapi.programming-hero.com/api/news/categories`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displaySetCatagory(data));
+    .then((data) => displaySetCatagory(data.data.news_category));
 };
 
 const displaySetCatagory = (data) => {
-  const accessTheCategory = data.data.news_category;
-  // console.log(accessTheCategory);
-  accessTheCategory.forEach((data) => {
+  data.forEach((data) => {
     // console.log(data);
     const { category_name } = data;
     const catagoryParent = document.getElementById("catagory-items");
@@ -24,3 +22,58 @@ const displaySetCatagory = (data) => {
 };
 
 setCatagory();
+
+////////////////////////////--------------------///////////////////////////////
+////////////////////////////--------------------///////////////////////////////
+////////////////////////////--------------------///////////////////////////////
+
+// set the card section
+const setCard = () => {
+  const url = `https://openapi.programming-hero.com/api/news/category/01`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((cards) => displayCard(cards));
+};
+
+const displayCard = (cards) => {
+  // const accessCards = cards.data[0];
+  // console.log(cards);
+  cards.data.forEach((cards) => {
+    const { thumbnail_url, title, details, total_view } = cards;
+    const { img, name } = cards.author;
+    const cardParent = document.getElementById("my-cards");
+    const createCardDiv = document.createElement("div");
+    createCardDiv.innerHTML = `
+    <div class="card mb-3 w-100">
+    <div class="row g-0">
+      <div class="col-md-4 ">
+       <img src="${thumbnail_url}" class="img-fluid rounded-start " alt="..." />
+         </div>
+         <div class="col-md-8">
+       <div class="card-body">
+             <h5 class="card-title">${title}</h5>
+            <p class="card-text">
+               ${
+                 details.length > 550 ? details.slice(0, 550) + "...." : details
+               }
+             </p>
+             <div class="card-text d-flex justify-content-between">
+               <p>
+                 <div class="d-flex gap-3">
+                  <img style="width:50px" class="rounded-circle" src="${img}" alt="">
+                  <p>${name}</p>
+               </div>
+               </p>
+              <p>${total_view}</p>
+              <button class=" btn btn-primary">Details</button>
+           </div>
+           </div>
+         </div>
+    </div>
+  </div>
+    `;
+    cardParent.appendChild(createCardDiv);
+  });
+};
+
+setCard();
