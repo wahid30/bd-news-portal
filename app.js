@@ -66,10 +66,10 @@ const displayCard = (cards) => {
                <p>
                  <div class="d-flex gap-3">
                   <img style="width:50px" class="rounded-circle" src="${img}" alt="">
-                  <p>${name}</p>
+                  <p>${name ? name : "no author name"}</p>
                </div>
                </p>
-              <p>Views: ${total_view}</p>
+              <p>Views: ${total_view ? total_view : "no views"}</p>
               <button onclick="categoryModalId('${
                 cards._id
               }')" class="btn btn-primary" data-bs-toggle="modal"
