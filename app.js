@@ -14,11 +14,19 @@ const displaySetCatagory = (data) => {
     const createDiv = document.createElement("div");
     createDiv.classList.add("col");
     createDiv.innerHTML = `
-    <p>${category_name}</p>
+    <button onclick="categoryId('${data.category_id}')" class="btn btn-outline-secondary">${category_name}</button>
     `;
     catagoryParent.appendChild(createDiv);
     // console.log(category_name);
   });
+};
+
+// category id
+const categoryId = (search) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/${search}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((cards) => displayCard(cards));
 };
 
 setCatagory();
@@ -28,20 +36,27 @@ setCatagory();
 ////////////////////////////--------------------///////////////////////////////
 
 // set the card section
-const setCard = () => {
-  const url = `https://openapi.programming-hero.com/api/news/category/01`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((cards) => displayCard(cards));
-};
+// const setCard = () => {
+//   const url = `https://openapi.programming-hero.com/api/news/category/01`;
+//   fetch(url)
+//     .then((res) => res.json())
+//     .then((cards) => displayCard(cards));
+// };
 
 const displayCard = (cards) => {
   // const accessCards = cards.data[0];
-  // console.log(cards);
+  // console.log(cards.data.length);
+
+  // display total items
+  const totalNews = document.getElementById("total-news");
+  const items = cards.data.length;
+  totalNews.innerText = items;
+  /////////
+  const cardParent = document.getElementById("my-cards");
+  cardParent.innerHTML = ``;
   cards.data.forEach((cards) => {
     const { thumbnail_url, title, details, total_view } = cards;
     const { img, name } = cards.author;
-    const cardParent = document.getElementById("my-cards");
     const createCardDiv = document.createElement("div");
     createCardDiv.innerHTML = `
     <div class="card mb-3 w-100">
@@ -76,4 +91,4 @@ const displayCard = (cards) => {
   });
 };
 
-setCard();
+// setCard();
