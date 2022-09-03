@@ -44,9 +44,12 @@ const displayCard = (cards) => {
   const cardParent = document.getElementById("my-cards");
   cardParent.innerHTML = ``;
   /////////////
-  cards.data.forEach((cards) => {
-    const { thumbnail_url, title, details, total_view } = cards;
-    const { img, name } = cards.author;
+  const sortData = cards.data.sort((a, b) => {
+    return b.total_view - a.total_view;
+  });
+  cards.data.forEach((sortData) => {
+    const { thumbnail_url, title, details, total_view } = sortData;
+    const { img, name } = sortData.author;
     const createCardDiv = document.createElement("div");
     createCardDiv.innerHTML = `
     <div class="card mb-3 w-100">
@@ -71,7 +74,7 @@ const displayCard = (cards) => {
                </p>
               <p>Views: ${total_view ? total_view : "no views"}</p>
               <button onclick="categoryModalId('${
-                cards._id
+                sortData._id
               }')" class="btn btn-primary" data-bs-toggle="modal"
               data-bs-target="#authorDetailModal">Show Details</button>
            </div>
@@ -96,7 +99,6 @@ const categoryModalId = (search) => {
 
 /////////////
 const displayModal = (search) => {
-  // console.log(search.title);
   const modalTitle = document.getElementById("newsDetailModalLabel");
   modalTitle.innerText = search.author.name ? search.author.name : "No author";
   const myTitle = document.getElementById("my-Title");

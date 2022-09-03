@@ -149,5 +149,51 @@
       </div>
     </div>
     <!-- question 04 -->
+    <div class="card lg:card-side bg-base-100 shadow-xl my-5">
+      <div class="card-body">
+        <h2 class="card-title text-error-content text-2xl">
+          What are the differences between map, filter, forEach and find
+        </h2>
+        <p>
+          <strong>map():</strong>
+          The map method receives a function as a parameter. Then it applies it
+          on each element and returns an entirely new array populated with the
+          results of calling the provided function. This means that it returns a
+          new array that contains an image of each element of the array. It will
+          always return the same number of items.
+        </p>
+        <p>
+          <strong>filter()</strong>
+          Whenever you have to filter an array Javascript inbuilt method to
+          filter your array is the right choice to use. Filter let you provide a
+          callback for every element and returns a filtered array. The main
+          difference between forEach and filter is that forEach just loop over
+          the array and executes the callback but filter executes the callback
+          and check its return value. If the value is true element remains in
+          the resulting array but if the return value is false the element will
+          be removed for the resulting array.
+        </p>
+        <p>
+          <strong>forEach():</strong>
+          Foreach takes a callback function and run that callback function on
+          each element of array one by one.For every element on the array we are
+          calling a callback which gets element & its index provided by foreach.
+          Basically forEach works as a traditional for loop looping over the
+          array and providing you array elements to do operations on them.
+        </p>
+        <p>
+          <strong>find():</strong>
+          The arr.find() method in Javascript is used to get the value of the
+          first element in the array that satisfies the provided condition. It
+          checks all the elements of the array and whichever first element
+          satisfies the condition is going to print. This function will not work
+          function having the empty array elements, also does not change the
+          original array. Syntax:
+        </p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Learn More</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
