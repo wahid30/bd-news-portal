@@ -9,7 +9,6 @@ const setCatagory = () => {
 
 const displaySetCatagory = (data) => {
   data.forEach((data) => {
-    // console.log(data);
     const { category_name } = data;
     const catagoryParent = document.getElementById("catagory-items");
     const createDiv = document.createElement("div");
@@ -18,7 +17,6 @@ const displaySetCatagory = (data) => {
     <button onclick="categoryId('${data.category_id}')" class="btn btn-outline-secondary">${category_name}</button>
     `;
     catagoryParent.appendChild(createDiv);
-    // console.log(category_name);
   });
 };
 
@@ -27,7 +25,8 @@ const categoryId = (search) => {
   const url = `https://openapi.programming-hero.com/api/news/category/${search}`;
   fetch(url)
     .then((res) => res.json())
-    .then((cards) => displayCard(cards));
+    .then((cards) => displayCard(cards))
+    .catch((err) => console.log(err));
   toggleSpinner(true);
 };
 
@@ -37,30 +36,13 @@ setCatagory();
 ////////////////////////////--------------------///////////////////////////////
 ////////////////////////////--------------------///////////////////////////////
 
-// set the card section
-// const setCard = () => {
-//   const url = `https://openapi.programming-hero.com/api/news/category/01`;
-//   fetch(url)
-//     .then((res) => res.json())
-//     .then((cards) => displayCard(cards));
-// };
-
 const displayCard = (cards) => {
-  // const accessCards = cards.data[0];
-  // console.log(cards.data.length);
-
-  // display total items
   const totalNews = document.getElementById("total-news");
-  const totalNewsArea = document.getElementById("total-news-area");
   const items = cards.data.length;
   totalNews.innerText = items ? items : "No";
-
   /////////
   const cardParent = document.getElementById("my-cards");
   cardParent.innerHTML = ``;
-
-  /////////
-
   /////////////
   cards.data.forEach((cards) => {
     const { thumbnail_url, title, details, total_view } = cards;
@@ -87,7 +69,7 @@ const displayCard = (cards) => {
                   <p>${name}</p>
                </div>
                </p>
-              <p>${total_view}</p>
+              <p>Views: ${total_view}</p>
               <button onclick="categoryModalId('${
                 cards._id
               }')" class="btn btn-primary" data-bs-toggle="modal"
@@ -106,7 +88,6 @@ const displayCard = (cards) => {
 // modal
 const categoryModalId = (search) => {
   const url = `https://openapi.programming-hero.com/api/news/${search}`;
-  // console.log(url);
   fetch(url)
     .then((res) => res.json())
     .then((cards) => displayModal(cards.data[0]))
@@ -119,10 +100,11 @@ const displayModal = (search) => {
   const modalTitle = document.getElementById("newsDetailModalLabel");
   modalTitle.innerText = search.author.name ? search.author.name : "No author";
   const myTitle = document.getElementById("my-Title");
-  myTitle.innerText = search.title ? search.title : "No title";
+  myTitle.innerHTML = `
+  <p>Title: ${search.title ? search.title : "No title"}</p>
+  <p>Views: ${search.total_view ? search.total_view : "No Views"}</p>
+  `;
 };
-
-// displayModal();
 
 const toggleSpinner = (isLoading) => {
   const loaderSection = document.getElementById("spinner");
@@ -132,5 +114,3 @@ const toggleSpinner = (isLoading) => {
     loaderSection.classList.add("d-none");
   }
 };
-
-// setCard();
