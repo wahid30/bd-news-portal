@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLOGS</title>
+    <!-- tailwild css  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="w-9/12 mx-auto">
+    <!-- question 01 -->
+    <div class="card lg:card-side bg-base-100 shadow-xl my-5">
+      <div class="card-body">
+        <h2 class="card-title text-error-content text-2xl">
+          what are the differences between var,let and const in javascript?
+        </h2>
+        <p>
+          <strong>VAR:</strong>
+          Var statement is also used for variable declaration and it is Global
+          scoped variable. Variable declared with var is defined throughout the
+          program.Var is defined throughout the function but not if its declared
+          in a block as it is not block-scoped.Var statement can be reassigned.
+        </p>
+        <p>
+          <strong>LET:</strong>
+          Let statement is block-scoped and not a Global scope local variable
+          used for initializing a statement. This statement can be used in
+          function as it is function-scoped and one of the main character of let
+          statement is that it can be reassigned.
+        </p>
+        <p>
+          <strong>CONST:</strong>
+          Const is quite similar to Let with the only difference that once the
+          variable has been defined then its value cannot be changed. Like if
+          the user tries to change the value of the const variable, then they
+          will get an error.
+        </p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Learn More</button>
+        </div>
+      </div>
+    </div>
+    <!-- question 02 -->
+    <div class="card lg:card-side bg-base-100 shadow-xl my-5">
+      <div class="card-body">
+        <h2 class="card-title text-error-content text-2xl">
+          What are the differences between arrow functions and regular functions
+          in JavaScript?
+        </h2>
+        <p>
+          JavaScript's arrow functions might seem the same as regular functions
+          on the surface, but they have some very important differences:
+          Syntactical differences, this value (execution context), Usage as
+          methods, Usage as constructors, arguments binding.
+        </p>
+        <p>
+          <strong>Syntax</strong>
+          The first and most obvious difference between arrow functions and
+          regular functions is their syntax. Not only do they look different,
+          but arrow functions also provide an implicit return shorthand and
+          allow parenthesis around a single argument to be omitted.
+        </p>
+        <p>
+          <strong>Execution context</strong>
+          Inside a regular function, execution context (i.e. the value of this)
+          is dynamic. This means that the value of this depends on how the
+          function was invoked (simple invocation, method invocation, indirect
+          invocation or constructor invocation). On the other hand, an arrow
+          function does not define its own execution context. This results in an
+          arrow function's this being resolved lexically (i.e. the scope in
+          which the arrow function was defined).Function.prototype.call(),
+          Function.prototype.bind() and Function.prototype.apply() do not work
+          correctly with arrow functions either. Their purpose is to allow
+          methods to execute within different scopes, but the this value of an
+          arrow function cannot be changed, as it's resolved lexically.
+        </p>
+        <p>
+          <strong>Methods</strong>Due to arrow functions not defining their own
+          execution context, they're not well-suited for usage as methods.
+          However, thanks to the Class fields proposal, arrow functions can be
+          used as methods inside classes, if your environment supports it.
+        </p>
+        <p>
+          <strong>Constructors </strong>Regular functions can be used as
+          constructors, using the new keyword. Yet another consequence of the
+          lexical resolution of this inside arrow functions is that they cannot
+          be used as constructors. Using new with an arrow function results in a
+          TypeError.
+        </p>
+        <p>
+          <strong>Arguments</strong>Another difference is the binding of the
+          arguments object. Unlike regular functions, arrow functions don't have
+          their own arguments object. A modern alternative that circumvents this
+          limitation is the usage of rest parameters.
+        </p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Learn More</button>
+        </div>
+      </div>
+    </div>
+    <!-- question 03 -->
+    <div class="card lg:card-side bg-base-100 shadow-xl my-5">
+      <div class="card-body">
+        <h2 class="card-title text-error-content text-2xl">
+          why use template string in javascript?
+        </h2>
+        <p>
+          <strong
+            >Handling strings is one of the most essentials jobs for software
+            development. In JavaScript, there is special syntax for it —
+            template strings (also called template literals).</strong
+          >
+          There are 3 Uses of Template Strings in JavaScript:Writing Multi-line
+          Strings Directly,String Interpolation with Expressions,Using Tagged
+          Templates for Complex Scenarios
+        </p>
+        <p>
+          <strong>1. Writing Multi-line Strings Directly:</strong>
+          The simplest usage of the template literal is to write a multi-line
+          string directly.As shown above, we print a two-line string contained
+          by two back ticks. As long as the string has a new line, the
+          console.log function prints the new line as well.
+        </p>
+        <p>
+          <strong>2. String Interpolation with Expressions:</strong>
+          Writing multi-line strings is just the tip of the iceberg. The power
+          of the template string literal is shown by its string interpolation
+          ability.
+        </p>
+        <p>
+          <strong>3. Using Tagged Templates for Complex Scenarios:</strong>
+          The tagged template is a more advanced usage of the template strings.
+          The basic structure of it is as follows:
+          <strong>tag_name(arrStrings, exp1, exp2, exp3, ...) </strong>
+          Basically, defining a tagged template is similar to defining a
+          function. But the parameters of it are special: the first parameter is
+          an array of strings, and the following ones are all expressions.
+        </p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Learn More</button>
+        </div>
+      </div>
+    </div>
+    <!-- question 04 -->
+  </body>
+</html>
