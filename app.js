@@ -27,6 +27,7 @@ const categoryId = (search) => {
   fetch(url)
     .then((res) => res.json())
     .then((cards) => displayCard(cards));
+  toggleSpinner(true);
 };
 
 setCatagory();
@@ -49,11 +50,17 @@ const displayCard = (cards) => {
 
   // display total items
   const totalNews = document.getElementById("total-news");
+  const totalNewsArea = document.getElementById("total-news-area");
   const items = cards.data.length;
-  totalNews.innerText = items;
+  totalNews.innerText = items ? items : "No";
+
   /////////
   const cardParent = document.getElementById("my-cards");
   cardParent.innerHTML = ``;
+
+  /////////
+
+  /////////////
   cards.data.forEach((cards) => {
     const { thumbnail_url, title, details, total_view } = cards;
     const { img, name } = cards.author;
@@ -62,7 +69,7 @@ const displayCard = (cards) => {
     <div class="card mb-3 w-100">
     <div class="row g-0">
       <div class="col-md-4 ">
-       <img src="${thumbnail_url}" class="img-fluid rounded-start " alt="..." />
+       <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="..." />
          </div>
          <div class="col-md-8">
        <div class="card-body">
@@ -80,7 +87,14 @@ const displayCard = (cards) => {
                </div>
                </p>
               <p>${total_view}</p>
-              <button class=" btn btn-primary">Details</button>
+              <button onclick="categoryModalId('${cards._id}')" 
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+             Details
+            </button>
            </div>
            </div>
          </div>
@@ -89,6 +103,68 @@ const displayCard = (cards) => {
     `;
     cardParent.appendChild(createCardDiv);
   });
+  toggleSpinner(false);
+};
+
+// modal
+const categoryModalId = (search) => {
+  const url = `https://openapi.programming-hero.com/api/news/${search}`;
+  // console.log(url);
+  fetch(url)
+    .then((res) => res.json())
+    .then((cards) => displayModal(cards.data));
+};
+
+/////////////
+const displayModal = (search) => {
+  search.forEach((datas) => {
+    const myModal = document.getElementById("my-modal");
+    const createModalDiv = document.createElement("div");
+    createModalDiv.innerHTML = `
+    <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">${datas.author.name}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">${datas.title}</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+    `;
+    myModal.appendChild(createModalDiv);
+  });
+};
+
+// displayModal();
+const toggleSpinner = (isLoading) => {
+  const loaderSection = document.getElementById("spinner");
+  if (isLoading) {
+    loaderSection.classList.remove("d-none");
+  } else {
+    loaderSection.classList.add("d-none");
+  }
 };
 
 // setCard();
